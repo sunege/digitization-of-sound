@@ -144,7 +144,7 @@ export function Step3Encoding() {
             <RunButton
               phase={enc.running ? 'running' : enc.done ? 'done' : 'idle'}
               label="符号化を実行"
-              onRun={enc.run}
+              onRun={enc.done ? enc.reset : enc.run}
             />
             <PlayButton label="元の音" isPlaying={isPlaying} onClick={() => play(originalSignal)} />
             <PlayButton

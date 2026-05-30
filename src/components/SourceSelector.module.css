@@ -55,7 +55,37 @@
   font-size: 1.1rem;
 }
 
-.rec {
-  font-size: 0.6rem;
-  color: #ef4444;
+/* ラベル。\n を改行として表示する（和音の2行表示用）。 */
+.label {
+  white-space: pre-line;
+}
+
+/* 準備完了＝録音待機（「録音開始」）。押せば録ることを赤で強調する。 */
+.armed {
+  border-color: #ef4444;
+  background: #7f1d1d;
+  color: #fee2e2;
+  font-weight: 700;
+}
+
+.armed:hover {
+  border-color: #f87171;
+}
+
+/* 録音中。赤を点滅させて進行中であることを示す。 */
+.recording {
+  border-color: #ef4444;
+  background: #7f1d1d;
+  color: #fee2e2;
+  animation: recPulse 1s ease-in-out infinite;
+}
+
+@keyframes recPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
 }

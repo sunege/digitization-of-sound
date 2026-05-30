@@ -13,6 +13,17 @@
   gap: 10px;
 }
 
+/* ページ（アプリ）タイトル。控えめに表示し、区切り線でStep情報と分ける。 */
+.brand {
+  flex-shrink: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  white-space: nowrap;
+  padding-right: 12px;
+  border-right: 1px solid #334155;
+}
+
 .badge {
   flex-shrink: 0;
   padding: 3px 10px;

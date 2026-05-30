@@ -18,7 +18,7 @@ import type { Viewport } from '../types/audio';
  * - bottom: 時間ラベル（横軸）用
  */
 export const PLOT_MARGIN = {
-  left: 42,
+  left: 52, // 量子化レベル番号（最大5桁）が見切れないよう確保
   right: 10,
   top: 8,
   bottom: 26,

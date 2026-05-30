@@ -1,10 +1,10 @@
 /**
  * 符号化の進行を波形グラフ上に描くレイヤー（Step3）。
  *
- * 量子化点(○)に対して、符号化の状態を色と装飾で示す:
+ * 量子化点(●)に対して、符号化の状態を色と装飾で示す:
  *   - 変換済み      : 緑の塗りつぶし＋通し番号
  *   - 次に変換する点 : 点滅する強調リング（クリックを促す）
- *   - 未変換        : 通常の量子化点(○)
+ *   - 未変換        : 量子化点と同じピンクの塗りつぶし(●)
  *
  * 「左から順に変換していく」流れを、グラフ側でも視認できるようにする。
  */
@@ -14,17 +14,19 @@ import type { QuantizedValue } from '../math/quantization';
 import { theme } from './theme';
 
 interface Options {
-  /** 表示対象の点（時刻昇順, 表示区間内）。 */
   samples: SamplePoint[];
   quantized: QuantizedValue[];
-  /** 変換済みの個数（先頭から）。 */
+  /** 変換済みの個数（左から数えて）。 */
   encodedCount: number;
-  /** 「次に変換する点」を強調するか（自動変換中は不要）。 */
+  /** 次の点を点滅で強調するか。 */
   highlightNext: boolean;
-  /** 点滅用の位相（0〜1）。 */
+  /** 点滅の進捗（0〜1）。 */
   pulse: number;
 }
 
+/**
+ * @param options samples/quantized と符号化の進捗
+ */
 export function makeEncodingPointRenderer(options: Options): Renderer {
   const { samples, quantized, encodedCount, highlightNext, pulse } = options;
 
@@ -32,6 +34,9 @@ export function makeEncodingPointRenderer(options: Options): Renderer {
     for (let i = 0; i < samples.length; i++) {
       const x = mapper.timeToX(samples[i].timeSec);
       const y = mapper.ampToY(quantized[i].amplitude);
+
+      // 表示範囲外（プロット領域の左右の外）の点は描かない。
+      if (x < mapper.plotLeft || x > mapper.plotRight) continue;
 
       if (i < encodedCount) {
         // 変換済み: 緑の塗りつぶし＋通し番号。
@@ -49,22 +54,19 @@ export function makeEncodingPointRenderer(options: Options): Renderer {
         ctx.arc(x, y, r, 0, Math.PI * 2);
         ctx.stroke();
         ctx.globalAlpha = 1;
-        // 本体（中空のピンク）。
-        drawHollow(ctx, x, y, theme.quantPoint);
+
+        // 中心の点。
+        ctx.fillStyle = theme.quantPoint;
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI * 2);
+        ctx.fill();
       } else {
-        // 未変換: 通常の量子化点。
-        drawHollow(ctx, x, y, theme.quantPoint);
+        // 未変換: 量子化点と同じピンクの塗りつぶし（前ステップの量子化点と統一）。
+        ctx.fillStyle = theme.quantPoint;
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
   };
-}
-
-function drawHollow(ctx: CanvasRenderingContext2D, x: number, y: number, color: string): void {
-  ctx.strokeStyle = color;
-  ctx.fillStyle = theme.background;
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.arc(x, y, 4, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.stroke();
 }

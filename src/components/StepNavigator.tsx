@@ -28,6 +28,7 @@ export function StepNavigator({ currentStep, onPrev, onNext }: Props) {
   return (
     <header className={styles.header}>
       <div className={styles.top}>
+        <span className={styles.brand}>音のデジタル化</span>
         <span className={styles.badge}>
           Step {currentStep + 1} / {TOTAL_STEPS}
         </span>
