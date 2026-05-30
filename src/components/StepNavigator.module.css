@@ -1,0 +1,85 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Step・タイトル・説明を1行に並べる（コンパクト表示）。 */
+.top {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  background: #38bdf8;
+  color: #0f172a;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.title {
+  margin: 0;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  color: #f1f5f9;
+}
+
+.separator {
+  color: #475569;
+}
+
+.description {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.88rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.navButton {
+  padding: 8px 18px;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.navButton:hover:not(:disabled) {
+  border-color: #38bdf8;
+}
+
+.navButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #334155;
+}
+
+.dotActive {
+  background: #38bdf8;
+}

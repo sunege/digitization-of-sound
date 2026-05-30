@@ -1,0 +1,61 @@
+.grid {
+  display: grid;
+  /* 固定幅セルを並べて、全ボタンのサイズを統一する。 */
+  grid-template-columns: repeat(auto-fill, 72px);
+  gap: 8px;
+  justify-content: center;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 72px;
+  height: 60px;
+  padding: 4px;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-size: 0.72rem;
+  line-height: 1.1;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.item:hover {
+  border-color: #38bdf8;
+}
+
+.active {
+  border-color: #38bdf8;
+  background: #0c4a6e;
+}
+
+/* マイク録音は合成音と性質が違う（本物の音声）ので配色を変える（緑系）。 */
+.mic {
+  border-color: #16a34a;
+  background: #14532d;
+}
+
+.mic:hover {
+  border-color: #4ade80;
+}
+
+/* マイクが選択中のときは緑を強調。 */
+.mic.active {
+  border-color: #4ade80;
+  background: #166534;
+}
+
+.icon {
+  font-size: 1.1rem;
+}
+
+.rec {
+  font-size: 0.6rem;
+  color: #ef4444;
+}

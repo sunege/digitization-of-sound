@@ -1,0 +1,15 @@
+.wrap {
+  width: 100%;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  cursor: grab;
+  touch-action: none; /* ドラッグ中にスクロールさせない */
+}
+
+.canvas:active {
+  cursor: grabbing;
+}

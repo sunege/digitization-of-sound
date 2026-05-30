@@ -1,0 +1,43 @@
+.layout {
+  display: grid;
+  grid-template-columns: 330px minmax(0, 1fr);
+  gap: 20px;
+  width: 100%;
+  align-items: start;
+}
+
+.controls {
+  width: 100%;
+}
+
+.graph {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0; /* grid内でCanvasが縮めるようにする */
+}
+
+.note {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.canvasArea {
+  width: 100%;
+}
+
+/* グラフ直下の表示切替チェックボックスなど。 */
+.belowGraph {
+  width: 100%;
+  padding: 12px 14px;
+  background: #1e293b;
+  border-radius: 10px;
+}
+
+/* 画面が狭いときは縦積みに戻す（操作 → グラフ の順）。 */
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
